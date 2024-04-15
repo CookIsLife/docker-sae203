@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const socket = io(); // Connect to WebSocket server
+            const username = localStorage.getItem('username'); // Assuming username is stored in localStorage
+
+            document.getElementById('messageForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const messageInput = document.getElementById('messageInput');
+                if (messageInput.value) {
+                    const data = { message: messageInput.value, username: username };
+                    socket.emit('chat message', data);
+                    messageInput.value = '';
+                }
+            });
+
+            socket.on('chat message', function(data) {
+                const item = document.createElement('li');
+                item.textContent = data.username + ': ' + data.message; // Display username with message
+                document.getElementById('chatWindow').appendChild(item);
+                window.scrollTo(0, document.body.scrollHeight);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Chat Room</h2>
+    <ul id="chatWindow" style="border: 1px solid #ccc; padding: 10px; width: 300px; height: 400px; overflow-y: scroll;"></ul>
+    <form id="messageForm">
+        <input type="text" id="messageInput" placeholder="Enter message...">
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

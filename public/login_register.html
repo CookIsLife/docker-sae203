@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="login(event)">
+        Username: <input type="text" id="loginUsername"><br>
+        Password: <input type="password" id="loginPassword"><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="loginMessage"></div> <!-- 登录反馈消息 -->
+
+    <h2>Register</h2>
+    <form id="registerForm" onsubmit="register(event)">
+        Username: <input type="text" id="registerUsername"><br>
+        Password: <input type="password" id="registerPassword"><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="registerMessage"></div> <!-- 注册反馈消息 -->
+
+    <script src="app.js"></script>
+</body>
+</html>
